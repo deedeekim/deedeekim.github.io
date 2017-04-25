@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+  .states {
+    fill: none;
+    stroke: #fff;
+    stroke-linejoin: round;
+  }
+</style>
+<body>
+<div id="map"></div>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://d3js.org/d3-array.v1.min.js"></script>
+<script src="https://d3js.org/d3-geo.v1.min.js"></script>
+<script src="https://d3js.org/d3-queue.v3.min.js"></script>
+<script src="https://d3js.org/topojson.v2.min.js"></script>
+<script>
+// set width and height of graphic
+var width = 960,
+    height = 500;
+
+var projection = d3.geoAlbersUsa()
+    .scale(1000)
+    .translate([width / 2, height / 2]);
+
+// d3 geopath for projection
+var path = d3.geoPath()
+    .projection(projection);
+
+// create SVG elements in map HTML element
+var svg = d3.select("#map").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+// set color
+var color = d3.scaleThreshold()
+    .domain([0.02, 0.04, 0.06, 0.08, 0.10])
+    .range(["#f2f0f7", "#dadaeb", "#bcbddc", "#9e9ac8", "#756bb1", "#54278f"]);
+
+// queue up the datasets, run 'ready' when loaded
+d3.queue()
+    .defer(d3.json, "data/us.json")
+    .defer(d3.tsv, "data/unemployment.tsv")
+    .await(ready);
+
+// create the graphic with this runction
+function ready(error, us, unemployment) {
+  if (error) throw error;
+
+  var rateById = {}; // Create empty object for holding dataset
+  unemployment.forEach(function(d) {
+    rateById[d.id] = +d.rate; // Create property for each ID, give it value from rate
+    // important: cast rate to numeric value (+)
+  });
+  console.log(rateById);
+  
+  // create and style counties
+  svg.append("g")
+      .attr("class", "counties")
+    .selectAll("path")
+      .data(topojson.feature(us, us.objects.counties).features)
+    .enter().append("path")
+      .attr("d", path)
+      .style("fill", function(d) { return color(rateById[d.id]); });
+
+  // create state outlines
+  svg.append("path")
+      .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a.id !== b.id; }))
+      .attr("class", "states")
+      .attr("d", path);
+}
+</script>
+</body>
