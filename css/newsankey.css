@@ -1,0 +1,153 @@
+svg text {
+	font-size: 11px;
+	stroke-width: 0;
+	fill: black;
+}
+body {
+	font-family: 'Lato', sans-serif;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 14px;
+	margin: 5px;
+	margin-bottom: 10px;
+}
+.election-wrapper {
+	display: flex;
+	flex-direction: column;
+}
+.sankey {
+	overflow: visible;
+}
+.sankey .node text {
+	pointer-events: none;
+}
+.sankey .link {
+	fill: none;
+	stroke: #669999;
+	stroke-opacity: .25;
+}
+.sankey .link:hover {
+	stroke-opacity: .7;
+}
+.d3-tip h1 {
+	font-weight: 500;
+	font-size: 14px;
+	padding: 0;
+	margin-bottom: 5px;
+	width: 100%;
+}
+.d3-tip h2 {
+	font-weight: bold;
+	font-size: 12px;
+	padding-right: inherit;
+	padding-left: inherit;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	margin: 0px;
+}
+.d3-tip h3 {
+	font-weight: normal;
+	font-size: 8px;
+	margin: 0;
+	padding: 0;
+}
+.d3-tip table {
+	font-weight: normal;
+	font-size: 12px;
+	padding: none;
+	margin: 0;
+	width: 100%;
+	border: none;
+	border-collapse: collapse;
+}
+.d3-tip td {
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.d3-tip .col-left {
+	padding-right: 8px;
+}
+.d3-tip .table-wrapper {
+	margin: 0;
+	padding: inherit;
+	border: none;
+}
+.d3-tip {
+	line-height: 1;
+	font-weight: normal;
+	padding: 4px;
+	background: white;
+	color: black;
+	border-radius: 2px;
+	pointer-events: none;
+	background:  white;
+	box-shadow: 1px 1px 4px grey;
+}
+#sankey-labels {
+	font-family: 'Lato', sans-serif;
+	display: flex;
+	flex-direction: row;
+	align-self: center;
+	max-width: 900px;
+	justify-content: flex-start;
+	font-weight: bold;
+	font-size: 16px;
+	color: grey;
+	width: 100%;
+	margin-top: 8px;
+	margin-bottom: 8px;
+	margin-right: 20px;
+	margin-left: 20px;
+}
+.sankey-label {
+	flex: 1;
+	max-width: 80px;
+	color: #999;
+	font-size: 16px;
+	cursor: pointer;
+	float: left;
+	padding: 10px 18px;
+	border-top: solid 1px #CCC;
+	border-bottom: solid 1px #CCC;
+	border-left: solid 1px #CCC;
+	background: #f9f9f9;
+	margin: 0 0;
+}
+.sankey-label.clicked {
+	color: #000;
+	background: #e9e9e9;
+	border-color: #AAA;
+	box-shadow: inset 0px 0px 4px rgba(0,0,0,0.2);
+}
+.sankey-label.first {
+	border-radius: 4px 0 0 4px;
+}
+.sankey-label.last {
+	border-right: solid 1px #CCC;
+	border-radius: 0 4px 4px 0;
+}
+rect.dem {
+	fill: #306c94;
+	stroke: #306c94;
+}
+rect.dem:hover {
+	fill: #12416c;
+	stroke: #12416c;
+}
+rect.rep {
+	fill: #e5263f;
+	stroke: #e5263f;
+}
+rect.rep:hover {
+	fill: #cc0000;
+	stroke: #cc0000;
+}
+rect.none {
+	fill: #669999;
+	stroke: #669999;
+}
+rect.none:hover {
+	fill: #527a7a;
+	stroke: #527a7a;
+}
